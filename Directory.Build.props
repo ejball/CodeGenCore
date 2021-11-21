@@ -9,7 +9,7 @@
     <NoWarn>$(NoWarn);1591;1998;NU5105;CA1014;CA1508</NoWarn>
     <DebugType>embedded</DebugType>
     <GitHubOrganization>ejball</GitHubOrganization>
-    <RepositoryName>RepoName</RepositoryName>
+    <RepositoryName>CodeGenCore</RepositoryName>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://ejball.com/$(RepositoryName)</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/$(GitHubOrganization)/$(RepositoryName)/blob/master/ReleaseNotes.md</PackageReleaseNotes>

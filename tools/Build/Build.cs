@@ -12,7 +12,7 @@ return BuildRunner.Execute(args, build =>
 			{
 				GitLogin = gitLogin,
 				GitAuthor = new GitAuthorInfo("ejball", "ejball@gmail.com"),
-				SourceCodeUrl = "https://github.com/ejball/RepoName/tree/master/src",
+				SourceCodeUrl = "https://github.com/ejball/CodeGenCore/tree/master/src",
 			},
 			PackageSettings = new DotNetPackageSettings
 			{
