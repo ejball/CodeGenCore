@@ -5,10 +5,20 @@ using Scriban;
 
 namespace CodeGenCore;
 
+/// <summary>
+/// A template from which code can be generated.
+/// </summary>
+/// <remarks>The template is implemented with Scriban, a .NET implementation of Liquid templates.</remarks>
 public sealed class CodeGenTemplate
 {
+	/// <summary>
+	/// Parses a template.
+	/// </summary>
 	public static CodeGenTemplate Parse(string text) => new(Template.Parse(text));
 
+	/// <summary>
+	/// Generates code using the specified globals and settings.
+	/// </summary>
 	public IReadOnlyList<CodeGenOutputFile> Generate(CodeGenGlobals? globals = null, CodeGenSettings? settings = null)
 	{
 		var newLine = settings?.NewLine ?? Environment.NewLine;

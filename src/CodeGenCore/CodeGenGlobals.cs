@@ -4,8 +4,17 @@ using Scriban.Runtime;
 
 namespace CodeGenCore;
 
+/// <summary>
+/// The available globals when generating code from a template.
+/// </summary>
 public sealed class CodeGenGlobals
 {
+	/// <summary>
+	/// Creates globals from the specified object.
+	/// </summary>
+	/// <remarks>Each public property and method becomes a global with the exact
+	/// same name (not transformed to snake_case). The properties and methods can
+	/// be static or instance.</remarks>
 	public static CodeGenGlobals Create(object source)
 	{
 		var scriptObject = new ScriptObject();
