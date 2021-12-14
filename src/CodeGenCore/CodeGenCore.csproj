@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>CodeGenCore class library.</Description>
-    <PackageTags></PackageTags>
+    <Description>Library to generate code from a template.</Description>
+    <PackageTags>codegen</PackageTags>
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
