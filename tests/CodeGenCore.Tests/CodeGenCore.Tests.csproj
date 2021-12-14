@@ -15,4 +15,9 @@
     <ProjectReference Include="..\..\src\CodeGenCore\CodeGenCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="FluentAssertions" />
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
+
 </Project>
