@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace CodeGenCore;
 
 /// <summary>
@@ -17,4 +19,9 @@ public sealed class CodeGenSettings
 	/// use the specified indentation. If not, the indentation in the template is
 	/// used as is.</remarks>
 	public string? IndentText { get; set; }
+
+	/// <summary>
+	/// The culture to use. (Defaults to the "invariant" culture.)
+	/// </summary>
+	public CultureInfo? Culture { get; set; }
 }

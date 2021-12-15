@@ -31,7 +31,7 @@ public sealed class CodeGenTemplate
 			EnableRelaxedTargetAccess = true,
 			MemberRenamer = x => x.Name,
 		};
-		context.PushCulture(new CultureInfo("en-US"));
+		context.PushCulture(settings?.Culture ?? CultureInfo.InvariantCulture);
 
 		if (globals is not null)
 			context.PushGlobal(globals.ScriptObject);

@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace CodeGenCore.Tests
 {
 	internal class CodeGenTemplateTests
@@ -65,6 +67,17 @@ namespace CodeGenCore.Tests
 			var template = CodeGenTemplate.Parse("==> a.txt\n{{ Number }}\n{{ Triple Number }}");
 			var globals = CodeGenGlobals.Create(new Globals());
 			template.Generate(settings: s_lfSettings, globals: globals).Should().Equal(new CodeGenOutputFile("a.txt", "42\n74088\n"));
+		}
+
+		[TestCase(null, "3.14")]
+		[TestCase("", "3.14")]
+		[TestCase("en-NZ", "3.14")]
+		[TestCase("de-DE", "3,14")]
+		public void Culture(string? culture, string pi)
+		{
+			var template = CodeGenTemplate.Parse("==> a.txt\n{{ 3.14 }}\n");
+			template.Generate(settings: new() { NewLine = "\n", Culture = culture is null ? null : CultureInfo.CreateSpecificCulture(culture) })
+				.Should().Equal(new CodeGenOutputFile("a.txt", $"{pi}\n"));
 		}
 
 		public sealed class Globals
