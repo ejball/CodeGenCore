@@ -47,31 +47,40 @@ public sealed class CodeGenTemplate
 
 		using var reader = new StringReader(text);
 
-		// find first file
-		var fileStart = "";
+		var singleFileName = settings?.SingleFileName;
+		string? fileStart = null;
 		string? line;
-		while ((line = reader.ReadLine()) != null)
+		if (singleFileName is null)
 		{
-			var match = Regex.Match(line, @"^==+>");
-			if (match.Success)
+			// find first file
+			fileStart = "";
+			while ((line = reader.ReadLine()) != null)
 			{
-				fileStart = match.Value;
-				break;
+				var match = Regex.Match(line, @"^==+>");
+				if (match.Success)
+				{
+					fileStart = match.Value;
+					break;
+				}
 			}
+		}
+		else
+		{
+			line = "";
 		}
 
 		var files = new List<CodeGenOutputFile>();
 
 		while (line != null)
 		{
-			var fileName = line.Substring(fileStart.Length).Trim();
+			var fileName = singleFileName ?? line.Substring(fileStart!.Length).Trim();
 			if (fileName.Length == 0)
 				throw new CodeGenException("Missing file name.");
 			if (files.Any(x => x.Name.Equals(fileName, StringComparison.OrdinalIgnoreCase)))
 				throw new CodeGenException($"Duplicate file name: {fileName}");
 
 			var fileLines = new List<string>();
-			while ((line = reader.ReadLine()) != null && !line.StartsWith(fileStart, StringComparison.Ordinal))
+			while ((line = reader.ReadLine()) != null && (fileStart is null || !line.StartsWith(fileStart, StringComparison.Ordinal)))
 			{
 				line = line.TrimEnd();
 

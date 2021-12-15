@@ -29,4 +29,11 @@ public sealed class CodeGenSettings
 	/// The culture to use. (Defaults to the "invariant" culture.)
 	/// </summary>
 	public CultureInfo? Culture { get; set; }
+
+	/// <summary>
+	/// The name of the single file to generate from the template.
+	/// </summary>
+	/// <remarks>Normally a template supports multiple files. To generate a single
+	/// file from the template, specify the desired file name here.</remarks>
+	public string? SingleFileName { get; set; }
 }

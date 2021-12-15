@@ -110,6 +110,20 @@ namespace CodeGenCore.Tests
 			Assert.Throws<CodeGenException>(() => template.Generate());
 		}
 
+		[Test]
+		public void IgnorePrologue()
+		{
+			var template = CodeGenTemplate.Parse("before\n==> a.txt\nafter\n");
+			template.Generate(settings: s_lfSettings).Should().Equal(new CodeGenOutputFile("a.txt", "after\n"));
+		}
+
+		[Test]
+		public void SingleFileName()
+		{
+			var template = CodeGenTemplate.Parse("before\n==> a.txt\nafter\n");
+			template.Generate(settings: new CodeGenSettings { NewLine = "\n", SingleFileName = "single.txt" }).Should().Equal(new CodeGenOutputFile("single.txt", "before\n==> a.txt\nafter\n"));
+		}
+
 		public sealed class Globals
 		{
 			public int Number => 42;
