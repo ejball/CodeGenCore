@@ -35,7 +35,16 @@ public sealed class CodeGenTemplate
 		if (globals is not null)
 			context.PushGlobal(globals.CreateScriptObject(settings));
 
-		var text = Template.Render(context);
+		string text;
+		try
+		{
+			text = Template.Render(context);
+		}
+		catch (Exception exception)
+		{
+			throw new CodeGenException(exception.Message, exception);
+		}
+
 		using var reader = new StringReader(text);
 
 		// find first file
@@ -55,7 +64,11 @@ public sealed class CodeGenTemplate
 
 		while (line != null)
 		{
-			var fileName = line.Substring(fileStart.Length);
+			var fileName = line.Substring(fileStart.Length).Trim();
+			if (fileName.Length == 0)
+				throw new CodeGenException("Missing file name.");
+			if (files.Any(x => x.Name.Equals(fileName, StringComparison.OrdinalIgnoreCase)))
+				throw new CodeGenException($"Duplicate file name: {fileName}");
 
 			var fileLines = new List<string>();
 			while ((line = reader.ReadLine()) != null && !line.StartsWith(fileStart, StringComparison.Ordinal))
@@ -92,7 +105,7 @@ public sealed class CodeGenTemplate
 			using var stringWriter = new StringWriter { NewLine = newLine };
 			foreach (var fileLine in fileLines)
 				stringWriter.WriteLine(fileLine);
-			files.Add(new CodeGenOutputFile(Name: fileName.Trim(), Text: stringWriter.ToString()));
+			files.Add(new CodeGenOutputFile(Name: fileName, Text: stringWriter.ToString()));
 		}
 
 		return files;

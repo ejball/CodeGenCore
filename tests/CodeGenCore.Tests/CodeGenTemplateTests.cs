@@ -88,6 +88,28 @@ namespace CodeGenCore.Tests
 			template.Generate(settings: new CodeGenSettings { NewLine = "\n", UseSnakeCase = true }, globals: globals).Should().Equal(new CodeGenOutputFile("a.txt", "42\n74088\n"));
 		}
 
+		[Test]
+		public void MissingGlobal()
+		{
+			var template = CodeGenTemplate.Parse("==> a.txt\n{{ number }}\n");
+			var globals = CodeGenGlobals.Create(new Globals());
+			Assert.Throws<CodeGenException>(() => template.Generate());
+		}
+
+		[Test]
+		public void BlankFileName()
+		{
+			var template = CodeGenTemplate.Parse("==>\nA\n");
+			Assert.Throws<CodeGenException>(() => template.Generate());
+		}
+
+		[Test]
+		public void RepeatedFileName()
+		{
+			var template = CodeGenTemplate.Parse("==> a.txt\n==> a.txt");
+			Assert.Throws<CodeGenException>(() => template.Generate());
+		}
+
 		public sealed class Globals
 		{
 			public int Number => 42;
