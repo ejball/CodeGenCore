@@ -8,7 +8,7 @@ public static CodeGenGlobals Create(object source)
 
 ## Remarks
 
-Each public property and method becomes a global with the exact same name (not transformed to snake_case). The properties and methods can be static or instance.
+Each public property and method becomes a global (transformed to snake_case if [`UseSnakeCase`](../CodeGenSettings/UseSnakeCase.md) is `true`). The properties and methods can be static or instance.
 
 ## See Also
 

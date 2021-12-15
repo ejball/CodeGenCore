@@ -4,6 +4,7 @@
 
 | public type | description |
 | --- | --- |
+| class [CodeGenException](./CodeGenCore/CodeGenException.md) | Thrown when an error occurs while generating code. |
 | class [CodeGenGlobals](./CodeGenCore/CodeGenGlobals.md) | The available globals when generating code from a template. |
 | record [CodeGenOutputFile](./CodeGenCore/CodeGenOutputFile.md) | The name and text of a generated code file. |
 | class [CodeGenSettings](./CodeGenCore/CodeGenSettings.md) | Settings used when generating code. |
