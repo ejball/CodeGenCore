@@ -11,6 +11,7 @@ public sealed class CodeGenSettings
 | name | description |
 | --- | --- |
 | [CodeGenSettings](CodeGenSettings/CodeGenSettings.md)() | The default constructor. |
+| [Culture](CodeGenSettings/Culture.md) { get; set; } | The culture to use. (Defaults to the "invariant" culture.) |
 | [IndentText](CodeGenSettings/IndentText.md) { get; set; } | The indentation to use. |
 | [NewLine](CodeGenSettings/NewLine.md) { get; set; } | The newline to use. (Defaults to `Environment.NewLine`.) |
 
