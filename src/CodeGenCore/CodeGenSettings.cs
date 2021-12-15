@@ -21,6 +21,11 @@ public sealed class CodeGenSettings
 	public string? IndentText { get; set; }
 
 	/// <summary>
+	/// True to make properties and methods available using snake case names. (Default false.)
+	/// </summary>
+	public bool UseSnakeCase { get; set; }
+
+	/// <summary>
 	/// The culture to use. (Defaults to the "invariant" culture.)
 	/// </summary>
 	public CultureInfo? Culture { get; set; }

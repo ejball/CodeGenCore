@@ -80,6 +80,14 @@ namespace CodeGenCore.Tests
 				.Should().Equal(new CodeGenOutputFile("a.txt", $"{pi}\n"));
 		}
 
+		[Test]
+		public void UseGlobalsSnakeCase()
+		{
+			var template = CodeGenTemplate.Parse("==> a.txt\n{{ number }}\n{{ triple number }}");
+			var globals = CodeGenGlobals.Create(new Globals());
+			template.Generate(settings: new CodeGenSettings { NewLine = "\n", UseSnakeCase = true }, globals: globals).Should().Equal(new CodeGenOutputFile("a.txt", "42\n74088\n"));
+		}
+
 		public sealed class Globals
 		{
 			public int Number => 42;

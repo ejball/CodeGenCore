@@ -12,36 +12,40 @@ public sealed class CodeGenGlobals
 	/// <summary>
 	/// Creates globals from the specified object.
 	/// </summary>
-	/// <remarks>Each public property and method becomes a global with the exact
-	/// same name (not transformed to snake_case). The properties and methods can
+	/// <remarks>Each public property and method becomes a global (transformed to snake_case if
+	/// <see cref="CodeGenSettings.UseSnakeCase" /> is <c>true</c>). The properties and methods can
 	/// be static or instance.</remarks>
-	public static CodeGenGlobals Create(object source)
+	public static CodeGenGlobals Create(object source) => new CodeGenGlobals(source);
+
+	internal ScriptObject CreateScriptObject(CodeGenSettings? settings)
 	{
 		var scriptObject = new ScriptObject();
 
-		var sourceType = source.GetType();
+		var sourceType = m_source.GetType();
+		var useSnakeCase = settings?.UseSnakeCase ?? false;
 
 		foreach (var (name, methodInfo) in sourceType.GetProperties().Select(x => (x.Name, x.GetMethod))
 			.Concat(sourceType.GetMethods().Where(IsValidMethod).Select(x => (x.Name, x))))
 		{
-			scriptObject.Import(member: name,
+			scriptObject.Import(
+				member: useSnakeCase ? StandardMemberRenamer.Rename(name) : name,
 				function: methodInfo.CreateDelegate(
 					Expression.GetDelegateType(
 						methodInfo.GetParameters()
 							.Select(parameter => parameter.ParameterType)
 							.Append(methodInfo.ReturnType)
 							.ToArray()),
-					target: methodInfo.IsStatic ? null : source));
+					target: methodInfo.IsStatic ? null : m_source));
 		}
 
-		return new CodeGenGlobals(scriptObject);
+		return scriptObject;
 
 		static bool IsValidMethod(MethodInfo method) =>
 			(method.Attributes & MethodAttributes.SpecialName) == 0 &&
 			method.DeclaringType != typeof(object);
 	}
 
-	internal ScriptObject ScriptObject { get; }
+	private CodeGenGlobals(object source) => m_source = source;
 
-	private CodeGenGlobals(ScriptObject scriptObject) => ScriptObject = scriptObject;
+	private readonly object m_source;
 }

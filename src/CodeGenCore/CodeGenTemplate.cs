@@ -29,12 +29,11 @@ public sealed class CodeGenTemplate
 		{
 			StrictVariables = true,
 			EnableRelaxedTargetAccess = true,
-			MemberRenamer = x => x.Name,
 		};
 		context.PushCulture(settings?.Culture ?? CultureInfo.InvariantCulture);
 
 		if (globals is not null)
-			context.PushGlobal(globals.ScriptObject);
+			context.PushGlobal(globals.CreateScriptObject(settings));
 
 		var text = Template.Render(context);
 		using var reader = new StringReader(text);
