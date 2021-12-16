@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Scriban;
+using Scriban.Runtime;
 
 namespace CodeGenCore;
 
@@ -23,12 +24,14 @@ public sealed class CodeGenTemplate
 	{
 		var newLine = settings?.NewLine ?? Environment.NewLine;
 		var indentText = settings?.IndentText;
+		var useSnakeCase = settings?.UseSnakeCase ?? false;
 		string? templateIndentText = null;
 
 		var context = new TemplateContext
 		{
 			StrictVariables = true,
 			EnableRelaxedTargetAccess = true,
+			MemberRenamer = useSnakeCase ? StandardMemberRenamer.Default : x => x.Name,
 		};
 		context.PushCulture(settings?.Culture ?? CultureInfo.InvariantCulture);
 

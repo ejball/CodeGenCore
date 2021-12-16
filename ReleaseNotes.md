@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.3.1
+
+* Fix non-snake-case for nested members.
+
 ## 0.3.0
 
 * Support snake case.
