@@ -2,7 +2,7 @@ using System.Globalization;
 
 namespace CodeGenCore.Tests
 {
-	internal class CodeGenTemplateTests
+	internal sealed class CodeGenTemplateTests
 	{
 		[Test]
 		public void EmptyTemplate()

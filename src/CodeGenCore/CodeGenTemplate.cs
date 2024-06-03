@@ -59,7 +59,7 @@ public sealed class CodeGenTemplate
 			fileStart = "";
 			while ((line = reader.ReadLine()) != null)
 			{
-				var match = Regex.Match(line, @"^==+>");
+				var match = Regex.Match(line, "^==+>");
 				if (match.Success)
 				{
 					fileStart = match.Value;
