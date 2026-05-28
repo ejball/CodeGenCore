@@ -31,10 +31,9 @@ public sealed class CodeGenGlobals
 				member: useSnakeCase ? StandardMemberRenamer.Rename(name) : name,
 				function: methodInfo.CreateDelegate(
 					Expression.GetDelegateType(
-						methodInfo.GetParameters()
+						[.. methodInfo.GetParameters()
 							.Select(parameter => parameter.ParameterType)
-							.Append(methodInfo.ReturnType)
-							.ToArray()),
+							.Append(methodInfo.ReturnType)]),
 					target: methodInfo.IsStatic ? null : m_source));
 		}
 

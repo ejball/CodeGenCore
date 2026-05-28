@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/CodeGenCore/CodeGenCore.csproj" />
+  <Project Path="tests/CodeGenCore.Tests/CodeGenCore.Tests.csproj" />
+  <Project Path="tools/Build/Build.csproj" />
+</Solution>
+

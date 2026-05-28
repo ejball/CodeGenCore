@@ -124,7 +124,7 @@ namespace CodeGenCore.Tests
 			template.Generate(settings: new CodeGenSettings { NewLine = "\n", SingleFileName = "single.txt" }).Should().Equal(new CodeGenOutputFile("single.txt", "before\n==> a.txt\nafter\n"));
 		}
 
-		public sealed class Globals
+		internal sealed class Globals
 		{
 			public int Number => 42;
 
