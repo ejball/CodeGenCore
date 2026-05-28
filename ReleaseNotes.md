@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.3.2
+
+* Update build and repository conventions.
+* Update Scriban dependency.
+
 ## 0.3.1
 
 * Fix non-snake-case for nested members.
@@ -17,3 +22,4 @@
 ## 0.1.0
 
 * Initial release.
+
