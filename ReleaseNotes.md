@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.3.3
+
+* Update Scriban dependency.
+
 ## 0.3.2
 
 * Update build and repository conventions.
