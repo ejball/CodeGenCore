@@ -62,6 +62,13 @@ namespace CodeGenCore.Tests
 		}
 
 		[Test]
+		public void NoLoopLimit()
+		{
+			var template = CodeGenTemplate.Parse("==> a.txt\n{{ for index in 1..1001 }}x{{ end }}");
+			template.Generate(settings: s_lfSettings).Should().Equal(new CodeGenOutputFile("a.txt", $"{new string('x', 1001)}\n"));
+		}
+
+		[Test]
 		public void UseGlobals()
 		{
 			var template = CodeGenTemplate.Parse("==> a.txt\n{{ Number }}\n{{ Triple Number }}");

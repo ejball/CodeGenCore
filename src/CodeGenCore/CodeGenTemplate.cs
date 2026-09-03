@@ -31,6 +31,7 @@ public sealed class CodeGenTemplate
 		{
 			StrictVariables = true,
 			EnableRelaxedTargetAccess = true,
+			LoopLimit = 0,
 			MemberRenamer = useSnakeCase ? StandardMemberRenamer.Default : x => x.Name,
 		};
 		context.PushCulture(settings?.Culture ?? CultureInfo.InvariantCulture);
