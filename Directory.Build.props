@@ -1,8 +1,8 @@
 <Project>
 
   <PropertyGroup>
-    <VersionPrefix>0.3.3</VersionPrefix>
-    <PackageValidationBaselineVersion>0.3.2</PackageValidationBaselineVersion>
+    <VersionPrefix>0.3.4</VersionPrefix>
+    <PackageValidationBaselineVersion>0.3.3</PackageValidationBaselineVersion>
     <NoWarn>$(NoWarn);1998;NU1507;NU5105</NoWarn>
     <GitHubOrganization>ejball</GitHubOrganization>
     <RepositoryName>CodeGenCore</RepositoryName>

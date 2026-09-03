@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.3.4
+
+* Disable Scriban's loop limit.
+
 ## 0.3.3
 
 * Update Scriban dependency.
